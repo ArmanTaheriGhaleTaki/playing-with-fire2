@@ -53,3 +53,5 @@ compile_commands.json
 
 # files
 README.md
+#folders
+.idea/
