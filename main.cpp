@@ -1,10 +1,9 @@
 #include <QApplication>
 #include <QPushButton>
+#include "src/Home/Home.h"
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    QPushButton button("Hello world!", nullptr);
-    button.resize(200, 100);
-    button.show();
+    (new Home())->show();
     return QApplication::exec();
 }
