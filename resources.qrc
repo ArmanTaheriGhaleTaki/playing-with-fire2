@@ -1,5 +1,10 @@
 <RCC>
     <qresource prefix="/images">
-        <file alias="menu">Resources/images/menu.jpg</file>
+        <file alias="menu">Resources/images/menu.png</file>
+        <file alias="icon">Resources/images/icon.png</file>
+        <file alias="stone">Resources/images/stone.png</file>
+        <file alias="ground">Resources/images/ground.png</file>
+        <file alias="brick">Resources/images/brick.png</file>
+        <file alias="button">Resources/images/button.png</file>
     </qresource>
 </RCC>

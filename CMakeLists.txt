@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS
         Multimedia
         REQUIRED)
 
-add_executable(plying_with_fire2 main.cpp resources.qrc src/Home/Home.cpp src/Home/Home.h src/views/TextField.cpp src/views/TextField.h)
+add_executable(plying_with_fire2 main.cpp src/Home/Home.cpp src/Home/Home.h src/views/TextField.cpp src/views/TextField.h src/views/Label.cpp src/views/Label.h src/views/Button.cpp src/views/Button.h resources.qrc src/Home/Game.cpp src/Home/Game.h)
 target_link_libraries(plying_with_fire2
         Qt::Core
         Qt::Gui
