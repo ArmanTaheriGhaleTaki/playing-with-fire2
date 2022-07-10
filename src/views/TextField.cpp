@@ -39,4 +39,5 @@ QRectF TextField::boundingRect() const {
     rect.setWidth(width);
     rect.setHeight(height);
     return QGraphicsTextItem::boundingRect();
+
 }

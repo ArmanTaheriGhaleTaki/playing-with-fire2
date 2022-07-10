@@ -17,6 +17,7 @@ Button::Button(int width, int height): width(width),height(height),QGraphicsText
 
     document()->setDocumentMargin(4);
 
+
 }
 
 

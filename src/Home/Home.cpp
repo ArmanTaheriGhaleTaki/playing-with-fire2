@@ -59,4 +59,5 @@ void Home::onGameStart() {
     close();
     (new Game(name_player1,name_player2,hp))->show();
 
+
 }

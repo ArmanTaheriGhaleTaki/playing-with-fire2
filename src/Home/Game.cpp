@@ -12,4 +12,5 @@ Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView
     scene->setBackgroundBrush(QBrush(QImage(":/images/ground")));
     setScene(scene);
 
+
 }

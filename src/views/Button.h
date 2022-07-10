@@ -19,6 +19,7 @@ protected:
 
 signals:
         void onPress();
+
 };
 
 
