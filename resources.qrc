@@ -6,5 +6,8 @@
         <file alias="ground">Resources/images/ground.png</file>
         <file alias="brick">Resources/images/brick.png</file>
         <file alias="button">Resources/images/button.png</file>
+        <file alias="player1">Resources/images/player1.png</file>
+        <file alias="player2">Resources/images/player2.png</file>
+        <file alias="bomb">Resources/gif/bomb.gif</file>
     </qresource>
 </RCC>

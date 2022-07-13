@@ -5,17 +5,20 @@
 
 Home::Home() {
 
+    // set fixed size
     setFixedSize(800,800);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
+    //create scene
     auto scene = new QGraphicsScene(this);
     scene->setSceneRect(0,0,800,800);
     scene->setBackgroundBrush(QBrush(QImage(":/images/menu")));
     setScene(scene);
 
 
+    // name inputs
     textField_player1 = new TextField(150,39);
     textField_player1->setPlainText(" ");
     scene->addItem(textField_player1);
@@ -26,27 +29,32 @@ Home::Home() {
     scene->addItem(textField_player2);
     textField_player2->setPos(440,430);
 
+    // hit points input
     textField_hp = new TextField(46,39);
     textField_hp->setPlainText(" ");
     scene->addItem(textField_hp);
     textField_hp->setPos(398,545);
 
+    // name label
     auto name_label = new Label();
     name_label->setPlainText("vs ");
     scene->addItem(name_label);
     name_label->setPos(392,415);
 
+    // hit point label
     auto hp_label = new Label();
     hp_label->setPlainText("HP:");
     scene->addItem(hp_label);
     hp_label->setPos(322,530);
 
+    // start button
     auto start_button = new Button(100,50);
     start_button->setPlainText(" Start ->");
     scene->addItem(start_button);
     start_button->setPos(640,680);
 
 
+    // go to main scene from home page
     connect (start_button, &Button::onPress,this, &Home::onGameStart);
 
 }
