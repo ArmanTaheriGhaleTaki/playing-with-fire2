@@ -2,6 +2,7 @@
 #define RESOURCES_QRC_GAME_H
 
 #include <QGraphicsView>
+#include "../Player/Player.h"
 
 class Game : public QGraphicsView{
 
