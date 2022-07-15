@@ -11,7 +11,7 @@ Home::Home() {
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
-    //create scene
+    // create scene
     auto scene = new QGraphicsScene(this);
     scene->setSceneRect(0,0,800,800);
     scene->setBackgroundBrush(QBrush(QImage(":/images/menu")));
