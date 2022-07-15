@@ -1,11 +1,18 @@
 #include "Player.h"
 
-Player::Player(int setPositionX,int setPositionY,const char* icon) {
+#include <QGraphicsTextItem>
+Player::Player(const char* icon,int width,int height): width(width),height(height) {
 
     QPixmap pixmap(icon);
+    pixmap = pixmap.scaled(width,height);
     setPixmap(pixmap);
 
-    setPos(setPositionX,setPositionY);
+}
 
+QRectF Player::boundingRect() const {
 
+    auto player = QGraphicsPixmapItem::boundingRect();
+    player.setWidth(width);
+    player.setHeight(height);
+    return QGraphicsPixmapItem::boundingRect();
 }

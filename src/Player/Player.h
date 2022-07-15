@@ -5,8 +5,14 @@
 class Player : public QGraphicsPixmapItem {
 private:
     int number_of_bombs{200};
+    int width{};
+    int height{};
 public:
-    Player(int setPositionX,int setPositionY,const char* icon );
+    Player(const char* icon,int width,int height);
+
+    QRectF boundingRect() const override;
+
+
 
 };
 
