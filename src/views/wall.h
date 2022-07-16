@@ -5,8 +5,13 @@
 
 class Wall:public Block
 {
+private:
+    int width{};
+    int height{};
 public:
     Wall(int width , int height);
+
+    QRectF boundingRect() const override;
 };
 
 #endif // WALL_H
