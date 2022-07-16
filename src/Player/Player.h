@@ -4,11 +4,13 @@
 #include <QGraphicsPixmapItem>
 class Player : public QGraphicsPixmapItem {
 private:
-    int number_of_bombs{200};
+
     int width{};
     int height{};
 public:
-    Player(const char* icon,int width,int height);
+
+    int NumberOfBombs{};
+    Player(const char* icon,int width,int height,int NumberOfBombs);
 
     QRectF boundingRect() const override;
 
