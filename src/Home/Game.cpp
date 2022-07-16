@@ -16,8 +16,8 @@ Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView
     scene->setBackgroundBrush(QBrush(QImage(":/images/ground")));
     setScene(scene);
 
-    auto blockWidth = width()/15;
-    auto blockHeight =height()/15;
+    auto blockWidth = 60;
+    auto blockHeight= 60;
 
     // put blocks on ground
     for(int i =0 ; i<15;i++)
@@ -79,14 +79,14 @@ void Game::keyPressEvent(QKeyEvent *event) {
         if(wall->x() < newX_p1 && wall->x() + wall->boundingRect().width() > newX_p1
            && wall->y() < newY_p1 && wall->y() + wall->boundingRect().height() > newY_p1)
             return;
-        if(wall->x() < newX_p1 + player_1Width && wall->x() + wall->boundingRect().width() > newX_p1 + player_1Width
+        if(wall->x() < newX_p1 + player_1Width && wall->x() + wall->boundingRect().width() > newX_p1 + (player_1Width-2)
            && wall->y() < newY_p1 && wall->y() + wall->boundingRect().height() > newY_p1)
             return;
-        if(wall->x() < newX_p1 + player_1Width && wall->x() + wall->boundingRect().width() > newX_p1 + player_1Height
+        if(wall->x() < newX_p1 + player_1Width && wall->x() + wall->boundingRect().width() > newX_p1 + (player_1Width-30)
            && wall->y() < newY_p1 + player_1Height && wall->y() + wall->boundingRect().height() > newY_p1 + player_1Height)
             return;
-        if(wall->x()<newX_p1 && wall->x() + wall->boundingRect().width() > newX_p1
-           && wall->y() < + player_1Height && wall->y() + wall->boundingRect().height() > newY_p1 + player_1Width)
+        if(wall->x() <newX_p1 && wall->x() + wall->boundingRect().width() > newX_p1
+           && wall->y() < + player_1Height && wall->y() + wall->boundingRect().height() > newY_p1 + player_1Height)
             return;
     }
 
@@ -123,14 +123,14 @@ void Game::keyPressEvent(QKeyEvent *event) {
         if(wall->x() < newX_p2 && wall->x() + wall->boundingRect().width() > newX_p2
            && wall->y() < newY_p2 && wall->y() + wall->boundingRect().height() > newY_p2)
             return;
-        if(wall->x() < newX_p2 + player_2Width && wall->x() + wall->boundingRect().width() > newX_p2 + player_2Width
+        if(wall->x() < newX_p2 + player_2Width && wall->x() + wall->boundingRect().width() > newX_p2 + player_2Height
            && wall->y() < newY_p2 && wall->y() + wall->boundingRect().height() > newY_p2)
             return;
         if(wall->x() < newX_p2 + player_2Width && wall->x() + wall->boundingRect().width() > newX_p2 + player_2Height
            && wall->y() < newY_p2 + player_2Height && wall->y() + wall->boundingRect().height() > newY_p2 + player_2Height)
             return;
         if(wall->x()<newX_p2 && wall->x() + wall->boundingRect().width() > newX_p2
-           && wall->y() < + player_2Height && wall->y() + wall->boundingRect().height() > newY_p2 + player_2Width)
+           && wall->y() < + player_2Height && wall->y() + wall->boundingRect().height() > newY_p2 + player_2Height)
             return;
     }
 
