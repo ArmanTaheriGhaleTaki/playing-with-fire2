@@ -5,16 +5,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-set(CMAKE_PREFIX_PATH C:/Qt/6.2.4/mingw_64)
 
-find_package(Qt6 COMPONENTS
+find_package(
+    Qt6 COMPONENTS
         Core
-        Gui
-        Widgets
+        Gui        Widgets
         Multimedia
         REQUIRED)
-
-add_executable(plying_with_fire2 main.cpp src/Home/Home.cpp src/Home/Home.h src/views/TextField.cpp src/views/TextField.h src/views/Label.cpp src/views/Label.h src/views/Button.cpp src/views/Button.h resources.qrc src/Home/Game.cpp src/Home/Game.h src/views/block.h src/views/block.cpp src/views/wall.h src/views/wall.cpp src/views/box.h src/views/box.cpp)
+add_executable(plying_with_fire2 main.cpp src/Home/Home.cpp src/Home/Home.h src/views/TextField.cpp src/views/TextField.h src/views/Label.cpp src/views/Label.h src/views/Button.cpp src/views/Button.h resources.qrc src/Home/Game.cpp src/Home/Game.h src/views/block.h src/views/block.cpp src/views/wall.h src/views/wall.cpp src/views/box.h src/views/box.cpp src/Player/Player.cpp src/Player/Player.h)
 target_link_libraries(plying_with_fire2
         Qt::Core
         Qt::Gui
@@ -23,6 +21,7 @@ target_link_libraries(plying_with_fire2
         )
 
 if (WIN32)
+    set(CMAKE_PREFIX_PATH C:/Qt/6.2.4/mingw_64)
     set(DEBUG_SUFFIX)
     if (MSVC AND CMAKE_BUILD_TYPE MATCHES "Debug")
         set(DEBUG_SUFFIX "d")
@@ -49,4 +48,7 @@ if (WIN32)
                 "${QT_INSTALL_PATH}/bin/Qt6${QT_LIB}${DEBUG_SUFFIX}.dll"
                 "$<TARGET_FILE_DIR:${PROJECT_NAME}>")
     endforeach (QT_LIB)
+else()
+    set(CMAKE_PREFIX_PATH /home/arman/Qt/6.2.4/gcc_x64)
 endif ()
+

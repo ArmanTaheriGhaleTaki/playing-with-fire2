@@ -2,9 +2,12 @@
     <qresource prefix="/images">
         <file alias="menu">Resources/images/menu.png</file>
         <file alias="icon">Resources/images/icon.png</file>
-        <file alias="stone">Resources/images/stone.png</file>
+        <file alias="wall">Resources/images/wall.png</file>
         <file alias="ground">Resources/images/ground.png</file>
         <file alias="brick">Resources/images/brick.png</file>
         <file alias="button">Resources/images/button.png</file>
+        <file alias="player1">Resources/images/player1.png</file>
+        <file alias="player2">Resources/images/player2.png</file>
+        <file alias="bomb">Resources/gif/bomb.gif</file>
     </qresource>
 </RCC>
