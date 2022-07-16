@@ -1,7 +1,9 @@
 #include "Game.h"
 #include "../views/wall.h"
-#include "../views/box.h"
+#include "../Player/Bomb.h"
+#include "../views/Brick.h"
 #include <QKeyEvent>
+
 
 Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView(){
 
@@ -9,7 +11,6 @@ Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView
     setFixedSize(900,900);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
 
     // create ground
     auto scene = new QGraphicsScene(this);
@@ -31,15 +32,28 @@ Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView
                     walls.append(wall);
         }
 
+//    auto brickWidth = 60;
+//    auto brickHeight= 60;
+//    for(int i =0 ; i<15;i++)
+//        for(int j =0;j<15;j++){
+//            if(i!=0&&i!=14&&j!=0&&j!=14&&(j%2!=0||i%2!=0))
+//                continue;
+//            auto brick = new Brick(brickWidth, brickHeight);
+//            scene->addItem(brick);
+//            brick->setPos(brickWidth*i,brickHeight*j);
+//            bricks.append(brick);
+//
+//        }
+
 
     // add players to scene
-    auto player1 = new Player(":/images/player1",33,45);
+    auto player1 = new Player(":/images/player1",33,45,2);
     scene->addItem(player1);
     setScene(scene);
     player1->setPos(75,70);
     players.append(player1);
 
-    auto player2 = new Player(":/images/player2",33,45);
+    auto player2 = new Player(":/images/player2",33,45,2);
     scene->addItem(player2);
     setScene(scene);
     player2->setPos(795,770);
@@ -73,6 +87,7 @@ void Game::keyPressEvent(QKeyEvent *event) {
     if(event->key() == Qt::Key_D)
         newX_p1 = player_1->x() + 7;
 
+
     // collision with walls
     for(const auto wall:walls)
     {
@@ -94,6 +109,19 @@ void Game::keyPressEvent(QKeyEvent *event) {
     player_1->setPos(newX_p1,newY_p1);
 
 
+    // add bombs to player1
+    if(event->key() == Qt::Key_Space)
+    {
+
+        auto bomb = new Bomb(25, 25);
+        scene()->addItem(bomb);
+        setScene(scene());
+        bomb->setPos(newX_p1,(newY_p1+23));
+
+
+    }
+
+
 
 
     // control player 2
@@ -105,16 +133,16 @@ void Game::keyPressEvent(QKeyEvent *event) {
     auto newX_p2 = player_2->x();
     auto newY_p2 = player_2->y();
 
-    if(event->key() == Qt::Key_8)
+    if(event->key() == Qt::Key_Up)
         newY_p2 = player_2->y() - 7;
 
-    if(event->key() == Qt::Key_2)
+    if(event->key() == Qt::Key_Down)
         newY_p2 = player_2->y() + 7;
 
-    if(event->key() == Qt::Key_4)
+    if(event->key() == Qt::Key_Left)
         newX_p2 = player_2->x() - 7;
 
-    if(event->key() == Qt::Key_6)
+    if(event->key() == Qt::Key_Right)
         newX_p2 = player_2->x() + 7;
 
     // collision with walls
@@ -124,19 +152,32 @@ void Game::keyPressEvent(QKeyEvent *event) {
         if(wall->x() < newX_p2 && wall->x() + wall->boundingRect().width() > newX_p2
            && wall->y() < newY_p2 && wall->y() + wall->boundingRect().height() > newY_p2)
             return;
-        if(wall->x() < newX_p2 + player_2Width && wall->x() + wall->boundingRect().width() > newX_p2 + player_2Height
+        if(wall->x() < newX_p2 + player_2Width && wall->x() + wall->boundingRect().width() > newX_p2 + (player_2Width-2)
            && wall->y() < newY_p2 && wall->y() + wall->boundingRect().height() > newY_p2)
             return;
-        if(wall->x() < newX_p2 + player_2Width && wall->x() + wall->boundingRect().width() > newX_p2 + player_2Height
+        if(wall->x() < newX_p2 + player_2Width && wall->x() + wall->boundingRect().width() > newX_p2 + (player_2Width-30)
            && wall->y() < newY_p2 + player_2Height && wall->y() + wall->boundingRect().height() > newY_p2 + player_2Height)
             return;
-        if(wall->x()<newX_p2 && wall->x() + wall->boundingRect().width() > newX_p2
+        if(wall->x() <newX_p2 && wall->x() + wall->boundingRect().width() > newX_p2
            && wall->y() < + player_2Height && wall->y() + wall->boundingRect().height() > newY_p2 + player_2Height)
             return;
     }
 
     player_2->setPos(newX_p2,newY_p2);
 
-}
 
+    // add bombs of player2
+
+    if(event->key() == Qt::Key_Plus || event->key() == Qt::Key_Enter)
+    {
+
+        auto bomb = new Bomb(25, 25);
+        scene()->addItem(bomb);
+        setScene(scene());
+        bomb->setPos(newX_p2,(newY_p2+23));
+
+
+    }
+
+}
 

@@ -1,7 +1,7 @@
 #include "Player.h"
 
 #include <QGraphicsTextItem>
-Player::Player(const char* icon,int width,int height): width(width),height(height) {
+Player::Player(const char* icon,int width,int height,int NumberOfBombs): width(width),height(height),NumberOfBombs{NumberOfBombs} {
 
     QPixmap pixmap(icon);
     pixmap = pixmap.scaled(width,height);

@@ -4,6 +4,9 @@
 #include <QGraphicsView>
 #include "../Player/Player.h"
 #include "../views/wall.h"
+#include "../Player/Bomb.h"
+#include "../views/Brick.h"
+
 
 class Game : public QGraphicsView{
 
@@ -12,6 +15,8 @@ public:
 
     QList<Player*> players{};
     QList<Wall*> walls{};
+    QList<Brick*> bricks{};
+
 
 
 protected:
