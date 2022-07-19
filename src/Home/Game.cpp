@@ -3,6 +3,9 @@
 #include "../Player/Bomb.h"
 #include "../views/Brick.h"
 #include <QKeyEvent>
+#include <QTimer>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 
 Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView(){
@@ -18,6 +21,15 @@ Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView
     scene->setBackgroundBrush(QBrush(QImage(":/images/ground")));
     setScene(scene);
 
+//    // play music
+//    auto player = new QMediaPlayer;
+//    auto  audioOutput = new QAudioOutput;
+//    player->setAudioOutput(audioOutput);
+//    connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
+//    player->setSource(QUrl(":/music/game"));
+//    audioOutput->setVolume(50);
+//    player->play();
+
     auto blockWidth = 60;
     auto blockHeight= 60;
 
@@ -32,30 +44,46 @@ Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView
                     walls.append(wall);
         }
 
-//    auto brickWidth = 60;
-//    auto brickHeight= 60;
-//    for(int i =0 ; i<15;i++)
-//        for(int j =0;j<15;j++){
-//            if(i!=0&&i!=14&&j!=0&&j!=14&&(j%2!=0||i%2!=0))
-//                continue;
-//            auto brick = new Brick(brickWidth, brickHeight);
-//            scene->addItem(brick);
-//            brick->setPos(brickWidth*i,brickHeight*j);
-//            bricks.append(brick);
-//
-//        }
+    // set bricks
+    auto brickWidth = 60;
+    auto brickHeight= 60;
+    int  bricksStructure[15][15] =
+            {
+                    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                    {0,0,0,0,1,1,0,1,1,1,1,1,1,0,0,},
+                    {0,0,0,1,0,1,0,1,0,1,0,1,0,1,0},
+                    {0,0,1,0,1,0,0,1,1,0,1,1,0,1,0},
+                    {0,0,0,1,0,1,0,1,0,1,0,1,0,1,0},
+                    {0,0,1,1,1,1,1,1,1,1,1,1,0,0,0},
+                    {0,1,0,1,0,1,0,0,0,1,0,1,0,0,0},
+                    {0,1,0,1,1,1,1,1,1,1,1,1,0,1,0},
+                    {0,1,0,1,0,1,0,1,0,1,0,1,0,1,0},
+                    {0,0,1,0,1,1,0,1,0,1,0,1,1,0,0},
+                    {0,0,0,1,0,1,0,1,0,1,0,0,0,0,0},
+                    {0,0,1,0,1,1,1,1,0,1,1,1,1,0,0},
+                    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                    {0,0,0,1,1,1,1,1,0,1,0,1,0,0,0},
+                    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},};
+    for(int i =0 ; i<15;i++)
+        for(int j =0;j<15;j++){
+            if(bricksStructure[i][j]!=1)
+                continue;
+            auto brick = new Brick(brickWidth, brickHeight);
+            scene->addItem(brick);
+            brick->setPos(brickWidth*i,brickHeight*j);
+            bricks.append(brick);
+
+        }
 
 
     // add players to scene
-    auto player1 = new Player(":/images/player1",33,45,2);
+    auto player1 = new Player(":/images/player1",33,45,100);
     scene->addItem(player1);
-    setScene(scene);
     player1->setPos(75,70);
     players.append(player1);
 
-    auto player2 = new Player(":/images/player2",33,45,2);
+    auto player2 = new Player(":/images/player2",33,45,100);
     scene->addItem(player2);
-    setScene(scene);
     player2->setPos(795,770);
     players.append(player2);
 }
@@ -106,18 +134,35 @@ void Game::keyPressEvent(QKeyEvent *event) {
             return;
     }
 
+    for(const auto brick:bricks)
+    {
+
+        if(brick->x() < newX_p1 && brick->x() + brick->boundingRect().width() > newX_p1
+           && brick->y() < newY_p1 && brick->y() + brick->boundingRect().height() > newY_p1)
+            return;
+        if(brick->x() < newX_p1 + player_1Width && brick->x() + brick->boundingRect().width() > newX_p1 + (player_1Width-2)
+           && brick->y() < newY_p1 && brick->y() + brick->boundingRect().height() > newY_p1)
+            return;
+        if(brick->x() < newX_p1 + player_1Width && brick->x() + brick->boundingRect().width() > newX_p1 + (player_1Width-30)
+           && brick->y() < newY_p1 + player_1Height && brick->y() + brick->boundingRect().height() > newY_p1 + player_1Height)
+            return;
+        if(brick->x() <newX_p1 && brick->x() + brick->boundingRect().width() > newX_p1
+           && brick->y() < + player_1Height && brick->y() + brick->boundingRect().height() > newY_p1 + player_1Height)
+            return;
+    }
+
+
     player_1->setPos(newX_p1,newY_p1);
 
 
     // add bombs to player1
-    if(event->key() == Qt::Key_Space)
+    if(event->key() == Qt::Key_Space && player_1->NumberOfBombs > 0)
     {
 
         auto bomb = new Bomb(25, 25);
         scene()->addItem(bomb);
-        setScene(scene());
         bomb->setPos(newX_p1,(newY_p1+23));
-
+        player_1->NumberOfBombs--;
 
     }
 
@@ -163,19 +208,35 @@ void Game::keyPressEvent(QKeyEvent *event) {
             return;
     }
 
+    for(const auto brick:bricks)
+    {
+
+        if(brick->x() < newX_p2 && brick->x() + brick->boundingRect().width() > newX_p2
+           && brick->y() < newY_p2 && brick->y() + brick->boundingRect().height() > newY_p2)
+            return;
+        if(brick->x() < newX_p2 + player_2Width && brick->x() + brick->boundingRect().width() > newX_p2 + (player_2Width-2)
+           && brick->y() < newY_p2 && brick->y() + brick->boundingRect().height() > newY_p2)
+            return;
+        if(brick->x() < newX_p2 + player_2Width && brick->x() + brick->boundingRect().width() > newX_p2 + (player_2Width-30)
+           && brick->y() < newY_p2 + player_2Height && brick->y() + brick->boundingRect().height() > newY_p2 + player_2Height)
+            return;
+        if(brick->x() <newX_p2 && brick->x() + brick->boundingRect().width() > newX_p2
+           && brick->y() < + player_2Height && brick->y() + brick->boundingRect().height() > newY_p2 + player_2Height)
+            return;
+    }
+
     player_2->setPos(newX_p2,newY_p2);
 
 
     // add bombs of player2
 
-    if(event->key() == Qt::Key_Plus || event->key() == Qt::Key_Enter)
+    if(event->key() == Qt::Key_Plus || event->key() == Qt::Key_Enter && player_2->NumberOfBombs > 0)
     {
 
         auto bomb = new Bomb(25, 25);
         scene()->addItem(bomb);
-        setScene(scene());
         bomb->setPos(newX_p2,(newY_p2+23));
-
+        player_2->NumberOfBombs--;
 
     }
 
