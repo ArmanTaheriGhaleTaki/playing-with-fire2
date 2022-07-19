@@ -6,8 +6,13 @@
 
 class Brick: public Block
 {
+private:
+    int width{};
+    int height{};
 public:
     Brick(int width,int height);
+
+    QRectF boundingRect() const override;
 };
 
 
