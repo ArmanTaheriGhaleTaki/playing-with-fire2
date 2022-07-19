@@ -7,10 +7,11 @@ private:
 
     int width{};
     int height{};
+    int HitPoint{3};
 public:
 
     int NumberOfBombs{};
-    int HitPoint{3};
+
     Player(const char* icon,int width,int height,int NumberOfBombs);
 
     QRectF boundingRect() const override;
