@@ -12,7 +12,8 @@ class Bomb:public QObject, public QGraphicsPixmapItem  {
 private:
     int width{};
     int height{};
-    int timeIntervals;
+    int pos_x{};
+    int pos_y{};
     QTimer *BombTimer;
 
 public:
