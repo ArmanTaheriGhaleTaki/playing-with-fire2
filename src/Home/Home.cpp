@@ -6,6 +6,7 @@
 Home::Home() {
 
     // set fixed size
+
     setFixedSize(800,800);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -18,7 +19,9 @@ Home::Home() {
     setScene(scene);
 
 
+
     // name inputs
+
     textField_player1 = new TextField(150,39);
     textField_player1->setPlainText(" ");
     scene->addItem(textField_player1);
@@ -29,20 +32,26 @@ Home::Home() {
     scene->addItem(textField_player2);
     textField_player2->setPos(440,430);
 
+
     // hit points input
+
     textField_hp = new TextField(46,39);
     textField_hp->setPlainText(" ");
     scene->addItem(textField_hp);
     textField_hp->setPos(398,545);
 
+
     // name label
-    auto name_label = new Label();
+
+    auto name_label = new Label(40,"white");
     name_label->setPlainText("vs ");
     scene->addItem(name_label);
     name_label->setPos(392,415);
 
+
     // hit point label
-    auto hp_label = new Label();
+
+    auto hp_label = new Label(40,"white");
     hp_label->setPlainText("HP:");
     scene->addItem(hp_label);
     hp_label->setPos(322,530);
@@ -66,5 +75,6 @@ void Home::onGameStart() {
     auto hp = textField_hp->toPlainText();
     close();
     (new Game(name_player1,name_player2,hp))->show();
+
 
 }

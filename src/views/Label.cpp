@@ -1,12 +1,12 @@
 #include "Label.h"
 #include <QFont>
 #include <QTextDocument>
-Label::Label() {
+Label::Label(int fontSize,const char* color) {
 
 
-    setDefaultTextColor(QColor("white"));
+    setDefaultTextColor(QColor(color));
     QFont font;
-    font.setPixelSize(40);
+    font.setPixelSize(fontSize);
     font.setBold(true);
     setFont(font);
 
