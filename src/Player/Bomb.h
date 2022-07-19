@@ -18,7 +18,7 @@ private:
 public:
 
 
-    Bomb(int width,int height);
+    Bomb(int posX,int posY,int width,int height);
 
 public slots:
     void Exploding();

@@ -4,7 +4,7 @@
 #include <QGraphicsTextItem>
 class Label: public QGraphicsTextItem {
 public:
-    Label();
+    Label(int fontSize,const char* color);
 };
 
 

@@ -43,7 +43,7 @@ Home::Home() {
 
     // name label
 
-    auto name_label = new Label();
+    auto name_label = new Label(40,"white");
     name_label->setPlainText("vs ");
     scene->addItem(name_label);
     name_label->setPos(392,415);
@@ -51,7 +51,7 @@ Home::Home() {
 
     // hit point label
 
-    auto hp_label = new Label();
+    auto hp_label = new Label(40,"white");
     hp_label->setPlainText("HP:");
     scene->addItem(hp_label);
     hp_label->setPos(322,530);
