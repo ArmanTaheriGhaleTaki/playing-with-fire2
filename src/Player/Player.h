@@ -9,10 +9,11 @@ private:
     int width{};
     int height{};
     int HitPoint{3};
-    int score{0};
+
 public:
 
     int NumberOfBombs{};
+    int score{0};
 
     Player(const char* icon,int width,int height,int NumberOfBombs);
     void DecreaseHealth();
