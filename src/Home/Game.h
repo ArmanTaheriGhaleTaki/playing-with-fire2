@@ -16,7 +16,7 @@ public:
     QList<Player*> players{};
     QList<Wall*> walls{};
     QList<Brick*> bricks{};
-
+    void getPos ();
 
 
 protected:

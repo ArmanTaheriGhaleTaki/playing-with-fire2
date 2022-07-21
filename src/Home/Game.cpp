@@ -183,7 +183,7 @@ void Game::keyPressEvent(QKeyEvent *event) {
     if(event->key() == Qt::Key_Space && player_1->NumberOfBombs > 0)
     {
 
-        auto bomb = new Bomb(newX_p1,newY_p1,25, 25);
+        auto bomb = new Bomb(newX_p1,newY_p1,25, 25, &bricks);
         scene()->addItem(bomb);
         bomb->setPos(newX_p1,(newY_p1+23));
         player_1->NumberOfBombs--;
@@ -253,12 +253,13 @@ void Game::keyPressEvent(QKeyEvent *event) {
     player_2->setPos(newX_p2,newY_p2);
 
 
+
     // add bombs of player2
 
     if(event->key() == Qt::Key_Plus || event->key() == Qt::Key_Enter && player_2->NumberOfBombs > 0)
     {
 
-        auto bomb = new Bomb(newX_p2,newY_p2,25, 25);
+        auto bomb = new Bomb(newX_p2,newY_p2,25, 25, &bricks);
         scene()->addItem(bomb);
         bomb->setPos(newX_p2,(newY_p2+23));
         player_2->NumberOfBombs--;

@@ -5,8 +5,10 @@
 #include <QList>
 #include <QGraphicsItem>
 #include "../Home/Game.h"
+#include <cmath>
 
-Bomb::Bomb(int posX,int posY,int width,int height): pos_x{posX},pos_y{posY},width{width},height{height},QObject()
+
+Bomb::Bomb(int posX,int posY,int width,int height, QList<Brick*> *bricks): pos_x{posX},pos_y{posY},width{width},height{height},bricks{bricks},QObject()
 {
 
     QPixmap pixmap(":/images/bomb");
@@ -15,22 +17,30 @@ Bomb::Bomb(int posX,int posY,int width,int height): pos_x{posX},pos_y{posY},widt
     auto BombTimer = new QTimer();
     connect(BombTimer, &QTimer::timeout, this , &Bomb::Exploding);
     BombTimer->start(1500);
+
 }
-void Bomb::Exploding() {
-    // if Bomb collides with bricks
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-    for (int i = 0, n = colliding_items.size(); i < n; ++i) {
-        if (typeid(*(colliding_items[i])) == typeid(Brick)) {
-            scene()->removeItem(colliding_items[i]);
-        }
-            // if Bomb collides with players
-        else if (typeid(*(colliding_items[i])) == typeid(Player)) {
-            scene()->removeItem(colliding_items[i]);
-//                delete colliding_items[i];
-//                delete this;
-//                return;
+void Bomb::Exploding()
+{
+
+    // destroying bricks
+    for (const auto brick : *bricks)
+    {
+        auto brick_x = brick->x();
+        auto brick_y = brick->y();
+        auto distance = sqrt(pow(brick_x - pos_x,2)+pow(brick_y - pos_y,2));
+        auto distanceBetweenPlayer_Bomb = sqrt(pow(brick_x - pos_x,2)+pow(brick_y - pos_y,2));
+        if(distance < 120)
+        {
+            scene()->removeItem(brick);
+//            delete brick;
+//            return;
         }
     }
+
     scene()->removeItem(this);
     delete this;
+
 }
+
+
+
