@@ -29,12 +29,13 @@ void Bomb::Exploding()
         auto brick_y = brick->y();
         auto distance = sqrt(pow(brick_x - pos_x,2)+pow(brick_y - pos_y,2));
         auto distanceBetweenPlayer_Bomb = sqrt(pow(brick_x - pos_x,2)+pow(brick_y - pos_y,2));
-        if(distance < 120)
+        if((distance < 120)&&((( pos_x/60==brick_x/60)&&!(((pos_x/60)%2==0)&&(pos_y/60)%2==1))||((pos_y/60==brick_y/60)&&!(((pos_x/60)%2==1)&&(pos_y/60)%2==0))))
         {
+
+
             scene()->removeItem(brick);
-//            delete brick;
-//            return;
-        }
+            bricks->removeAt(bricks->indexOf(brick));
+          }
     }
 
     scene()->removeItem(this);
