@@ -21,14 +21,19 @@ QRectF Player::boundingRect() const {
 void Player::DecreaseHealth()
 {
     HitPoint--;
-    if(HitPoint == 0)
-    {
-        scene()->removeItem(this);
-        delete this;
-    }
 }
 
-void Player::increaseScore()
+void Player::increaseScore(int amountOfIncreasing)
 {
-    score+=25;
+    score+=amountOfIncreasing;
+}
+
+void Player::setHitPoint(int hp)
+{
+    HitPoint = hp;
+}
+
+int Player::getHitPoint()
+{
+    return HitPoint;
 }

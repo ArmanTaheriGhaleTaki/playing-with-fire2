@@ -9,7 +9,7 @@
 #include <QAudioOutput>
 
 
-Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView(){
+Game::Game(QString name_player1,QString name_player2,int hp) : QGraphicsView(){
 
     // set fixed size
     setFixedSize(900,900);
@@ -100,13 +100,15 @@ Game::Game(QString name_player1,QString name_player2,QString hp) : QGraphicsView
     player2NameLabel->setPos(723,20);
 
     // add hit point of players to game scene
+    players.at(0)->setHitPoint(hp); // set hit point of player 1
     auto player1Hp = new Label(25,"#d53a5e");
-    player1Hp->setPlainText(hp);
+    player1Hp->setPlainText(QString::number(players.at(0)->getHitPoint()));
     scene->addItem(player1Hp);
     player1Hp->setPos(130,22);
 
+    players.at(1)->setHitPoint(hp); // set hit point of player 2
     auto player2Hp = new Label(25,"#dcf1c2");
-    player2Hp->setPlainText(hp);
+    player2Hp->setPlainText(QString::number(players.at(1)->getHitPoint()));
     scene->addItem(player2Hp);
     player2Hp->setPos(800,22);
 }
@@ -179,11 +181,14 @@ void Game::keyPressEvent(QKeyEvent *event) {
     player_1->setPos(newX_p1,newY_p1);
 
 
+    QString reconigzer; // reconigzing the player who is playing in that moment
+
     // add bombs to player1
     if(event->key() == Qt::Key_Space && player_1->NumberOfBombs > 0)
     {
-
-        auto bomb = new Bomb(newX_p1,newY_p1,25, 25, &bricks);
+        if (player_1)
+            reconigzer = "player_1";
+        auto bomb = new Bomb(newX_p1,newY_p1,25, 25, &bricks,&players,reconigzer);
         scene()->addItem(bomb);
         bomb->setPos(newX_p1,(newY_p1+23));
         player_1->NumberOfBombs--;
@@ -259,7 +264,9 @@ void Game::keyPressEvent(QKeyEvent *event) {
     if(event->key() == Qt::Key_Plus || event->key() == Qt::Key_Enter && player_2->NumberOfBombs > 0)
     {
 
-        auto bomb = new Bomb(newX_p2,newY_p2,25, 25, &bricks);
+        if (player_2)
+            reconigzer = "player_2";
+        auto bomb = new Bomb(newX_p2,newY_p2,25, 25, &bricks,&players,reconigzer);
         scene()->addItem(bomb);
         bomb->setPos(newX_p2,(newY_p2+23));
         player_2->NumberOfBombs--;
