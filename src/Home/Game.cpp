@@ -3,13 +3,14 @@
 #include "../Player/Bomb.h"
 #include "../views/Brick.h"
 #include "../views/Label.h"
+#include "Result.h"
 #include <QKeyEvent>
 #include <QTimer>
 #include <QMediaPlayer>
 #include <QAudioOutput>
 
 
-Game::Game(QString name_player1,QString name_player2,int hp) : QGraphicsView(){
+Game::Game(QString name_player1,QString name_player2,int hp) : name_player1{name_player1},name_player2{name_player2},QGraphicsView(){
 
     // set fixed size
     setFixedSize(900,900);
@@ -189,6 +190,7 @@ void Game::keyPressEvent(QKeyEvent *event) {
         if (player_1)
             reconigzer = "player_1";
         auto bomb = new Bomb(newX_p1,newY_p1,25, 25, &bricks,&players,reconigzer);
+        connect(bomb, &Bomb::onPlayerKilled, this, &Game::onResult);
         scene()->addItem(bomb);
         bomb->setPos(newX_p1,(newY_p1+23));
         player_1->NumberOfBombs--;
@@ -267,11 +269,28 @@ void Game::keyPressEvent(QKeyEvent *event) {
         if (player_2)
             reconigzer = "player_2";
         auto bomb = new Bomb(newX_p2,newY_p2,25, 25, &bricks,&players,reconigzer);
+        connect(bomb, &Bomb::onPlayerKilled, this, &Game::onResult);
         scene()->addItem(bomb);
         bomb->setPos(newX_p2,(newY_p2+23));
         player_2->NumberOfBombs--;
 
     }
+
+}
+QString Game::checkWinner()
+{
+    if(players.at(0)->score > players.at(1)->score)
+        return name_player1;
+    else
+        return name_player2;
+}
+void Game::onResult()
+{
+    auto winner = checkWinner();
+    auto scoreOfPlayer1 = players.at(0)->score;
+    auto scoreOfPlayer2 = players.at(1)->score;
+    (new Result(winner,scoreOfPlayer1,scoreOfPlayer2))->show();
+    close();
 
 }
 

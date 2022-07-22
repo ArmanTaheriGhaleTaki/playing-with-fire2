@@ -18,15 +18,13 @@ Bomb::Bomb(int posX, int posY, int width, int height, QList<Brick *> *bricks, QL
     setPixmap(pixmap);
     auto BombTimer = new QTimer();
     connect(BombTimer, &QTimer::timeout, this , &Bomb::Exploding);
-    BombTimer->start(5000);
+    BombTimer->start(2000);
 
 }
 void Bomb::Exploding()
 {
 
     // destroying bricks
-
-    Game *game;
     for (const auto brick : *bricks)
     {
         auto brick_x = brick->x();
@@ -55,7 +53,7 @@ void Bomb::Exploding()
         if (players->at(0)->getHitPoint() == 0)
         {
             players->at(1)->increaseScore(50);
-            game->close();
+            emit onPlayerKilled();
         }
     }
     else if(distancePlayer2_Bomb < 120)
@@ -64,7 +62,7 @@ void Bomb::Exploding()
         if (players->at(1)->getHitPoint() == 0)
         {
             players->at(0)->increaseScore(50);
-            game->close();
+            emit onPlayerKilled();
         }
     }
 

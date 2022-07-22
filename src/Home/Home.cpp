@@ -6,6 +6,7 @@
 #include <QDir>
 
 Home::Home() {
+
     // set fixed size
 
     setFixedSize(800,800);
@@ -27,7 +28,6 @@ Home::Home() {
     textField_player1->setPlainText(" ");
     scene->addItem(textField_player1);
     textField_player1->setPos(240,430);
-//    const char* player1_name = textField_player1->toPlainText();
 
     textField_player2 = new TextField(150,39);
     textField_player2->setPlainText(" ");

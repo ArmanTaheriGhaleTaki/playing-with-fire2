@@ -26,10 +26,11 @@ public:
 
     Bomb(int posX, int posY, int width, int height, QList<Brick *> *bricks,QList<Player*> *players,QString PlayerRecognizer);
 
+signals:
+    void onPlayerKilled();
 public slots:
 
     void Exploding();
-
 
 };
 
