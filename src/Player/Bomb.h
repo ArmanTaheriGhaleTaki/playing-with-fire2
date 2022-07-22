@@ -16,13 +16,15 @@ private:
     int height{};
     int pos_x{};
     int pos_y{};
+    QString PlayerRecognizer{};
     QTimer *BombTimer;
     QList<Brick *> *bricks;
+    QList<Player*> *players;
 
 public:
 
 
-    Bomb(int posX, int posY, int width, int height, QList<Brick *> *bricks);
+    Bomb(int posX, int posY, int width, int height, QList<Brick *> *bricks,QList<Player*> *players,QString PlayerRecognizer);
 
 public slots:
 

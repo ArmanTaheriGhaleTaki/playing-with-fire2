@@ -8,17 +8,20 @@ private:
 
     int width{};
     int height{};
-    int HitPoint{3};
+    int HitPoint{5};
 
 public:
 
     int NumberOfBombs{};
     int score{0};
 
-    Player(const char* icon,int width,int height,int NumberOfBombs);
     void DecreaseHealth();
-    void increaseScore();
+    void increaseScore(int amountOfIncreasing);
+    Player(const char* icon,int width,int height,int NumberOfBombs);
     QRectF boundingRect() const override;
+
+    void setHitPoint(int hp);
+    int getHitPoint();
 
 
 };

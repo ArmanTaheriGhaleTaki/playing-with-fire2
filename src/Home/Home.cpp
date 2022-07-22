@@ -35,9 +35,9 @@ Home::Home() {
 
     // hit points input
 
-    int score = 10;
+
     textField_hp = new TextField(46,39);
-    textField_hp->setPlainText(" " + QString::number(score));
+    textField_hp->setPlainText(" ");
     scene->addItem(textField_hp);
     textField_hp->setPos(398,545);
 
@@ -74,7 +74,7 @@ void Home::onGameStart()
 
     auto name_player1 = textField_player1->toPlainText();
     auto name_player2 = textField_player2->toPlainText();
-    auto hp = textField_hp->toPlainText();
+    auto hp = textField_hp->toPlainText().toInt();
     close();
     (new Game(name_player1,name_player2,hp))->show();
 
