@@ -2,9 +2,10 @@
 #include "../views/Label.h"
 #include "../views/Button.h"
 #include "Game.h"
+#include <QFile>
+#include <QDir>
 
 Home::Home() {
-
     // set fixed size
 
     setFixedSize(800,800);
@@ -26,6 +27,7 @@ Home::Home() {
     textField_player1->setPlainText(" ");
     scene->addItem(textField_player1);
     textField_player1->setPos(240,430);
+//    const char* player1_name = textField_player1->toPlainText();
 
     textField_player2 = new TextField(150,39);
     textField_player2->setPlainText(" ");
@@ -35,9 +37,8 @@ Home::Home() {
 
     // hit points input
 
-    int score = 10;
     textField_hp = new TextField(46,39);
-    textField_hp->setPlainText(" " + QString::number(score));
+    textField_hp->setPlainText(" ");
     scene->addItem(textField_hp);
     textField_hp->setPos(398,545);
 
@@ -68,15 +69,19 @@ Home::Home() {
     connect (start_button, &Button::onPress,this, &Home::onGameStart);
 
 }
-
 void Home::onGameStart()
 {
-
+    QFile file{"game.txt"};
+    if(file.open(QIODevice::ReadWrite)) {
+        file.write((textField_player1->toPlainText().toStdString()
+                    +"\n"+(textField_player2->toPlainText().toStdString())
+                    +"\n"+textField_hp->toPlainText().toStdString()).c_str());
+        file.flush();
+}
     auto name_player1 = textField_player1->toPlainText();
     auto name_player2 = textField_player2->toPlainText();
     auto hp = textField_hp->toPlainText();
+
     close();
     (new Game(name_player1,name_player2,hp))->show();
-
-
 }
