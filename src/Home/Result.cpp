@@ -21,21 +21,21 @@ Result::Result(QString winner,int scoreOfPlayer1,int scoreOfPlayer2)
     setScene(scene);
 
     // the winner of game
-    auto winnerLabel = new Label(25,"white"); // first part is size of font and second part is color
+    auto winnerLabel = new Label(50,"white"); // first part is size of font and second part is color
     winnerLabel->setPlainText(winner);
     scene->addItem(winnerLabel);
-    winnerLabel->setPos(48,20);
+    winnerLabel->setPos(130,230);
 
     // score of players
     auto scoreOfPlayer1Label = new Label(25,"white");
     scoreOfPlayer1Label->setPlainText(QString::number(scoreOfPlayer1));
     scene->addItem(scoreOfPlayer1Label);
-    scoreOfPlayer1Label->setPos(48,20);
+    scoreOfPlayer1Label->setPos(40,300);
 
     auto scoreOfPlayer2Label = new Label(25,"white");
     scoreOfPlayer2Label->setPlainText(QString::number(scoreOfPlayer2));
     scene->addItem(scoreOfPlayer2Label);
-    scoreOfPlayer2Label->setPos(48,20);
+    scoreOfPlayer2Label->setPos(370,300);
 
 
 }
