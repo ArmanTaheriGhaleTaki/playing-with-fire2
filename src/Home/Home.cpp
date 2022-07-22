@@ -80,8 +80,7 @@ void Home::onGameStart()
 }
     auto name_player1 = textField_player1->toPlainText();
     auto name_player2 = textField_player2->toPlainText();
-    auto hp = textField_hp->toPlainText();
-
+    auto hp = textField_hp->toPlainText().toInt();
     close();
     (new Game(name_player1,name_player2,hp))->show();
 }

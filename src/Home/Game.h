@@ -11,11 +11,10 @@
 class Game : public QGraphicsView{
 
 public:
-    Game(QString name_player1,QString name_player2,QString hp);
+    Game(QString name_player1,QString name_player2,int hp);
     QList<Player*> players{};
     QList<Wall*> walls{};
     QList<Brick*> bricks{};
-    void getPos ();
 
 
 protected:
