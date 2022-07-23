@@ -1,7 +1,7 @@
 # playing-with-fire2
 This is a 1v1 game base on [playing with fire](https://www.crazygames.com/game/playing-with-fire-2)
 for university project of Advanced programming written in qt  (a frame work for C++)<br><br><br>
-![Screenshot from 2022-07-23 12-21-21](https://user-images.githubusercontent.com/88885103/180596352-f0f7ab50-840e-47f5-89d9-8a967e4083a8.png)
+![image](https://user-images.githubusercontent.com/88885103/180598955-91c706c6-2386-477f-b524-1d424800766f.png)
 # how to play 
 first  player one movements are going up (w) & goint left (a) & going right (d) & goint donw (s) & and planting(space bar)<br>
 second player one movements are going up (8) & goint left (4) & going right (6) & goint donw (2) & and planting(+)<br><br>
